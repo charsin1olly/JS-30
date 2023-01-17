@@ -57,11 +57,16 @@
 
     <script>
       window.addEventListener("keydown", (e) => {
-        let sound = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        function playAudio() {
+        const sound = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const box = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+        if (sound) {
           sound.play();
+          box.classList.add("playing");
+          setTimeout(() => {
+            box.classList.remove("playing");
+          }, 300);
         }
-        playAudio();
       });
     </script>
   </body>

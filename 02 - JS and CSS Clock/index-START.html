@@ -5,6 +5,7 @@
     <title>JS + CSS Clock</title>
   </head>
   <body>
+    <h1>現在時間:</h1>
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -25,7 +26,6 @@
       body {
         margin: 0;
         font-size: 2rem;
-        display: flex;
         flex: 1;
         min-height: 100vh;
         align-items: center;
@@ -54,18 +54,52 @@
 
       .hand {
         width: 50%;
-        height: 6px;
+        height: 3px;
         background: black;
         position: absolute;
         top: 50%;
+        /* 這個用來改變旋轉點 */
+        transform-origin: 100%;
+      }
+
+      .hour-hand {
+        width: 30%;
+        height: 10px;
+        top: 50%;
+        left: 20%;
+      }
+
+      .min-hand {
+        width: 40%;
+        height: 6px;
+        top: 50%;
+        left: 10%;
       }
     </style>
 
     <script>
-      console.log(new Date());
-      console.log(new Date().getHours());
-      console.log(new Date().getMinutes());
-      console.log(new Date().getSeconds());
+      function setTime() {
+        const hourHand = document.querySelector(".hour-hand");
+        const minHand = document.querySelector(".min-hand");
+        const secondHand = document.querySelector(".second-hand");
+        const h1Text = document.querySelector("h1");
+
+        const hour = new Date().getHours();
+        const min = new Date().getMinutes();
+        const sec = new Date().getSeconds();
+
+        h1Text.innerHTML = `現在時間：${hour.toString().padStart(2, "0")}:${min
+          .toString()
+          .padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+
+        // 一小時轉 360/12 = 30度 一分鐘/秒 轉360/60 = 6度 初始角度+90才是正確的起點
+        hourHand.style.transform = `rotate(${(360 / 12) * hour + 90}deg)`;
+        minHand.style.transform = `rotate(${(360 / 60) * min + 90}deg)`;
+        secondHand.style.transform = `rotate(${(360 / 60) * sec + 90}deg)`;
+      }
+
+      // 隔一段時間自動呼叫function
+      setInterval(setTime, 1000);
     </script>
   </body>
 </html>

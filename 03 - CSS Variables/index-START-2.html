@@ -1,4 +1,3 @@
-<!-- 沒用到變數的版本 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,6 +40,13 @@
       /*
       misc styles, nothing to do with CSS variables
     */
+      /* 方便管理整個頁面的變數 */
+      :root {
+        --spacing: 10px;
+        --blur: 0px;
+        --base: #ffc600;
+      }
+
       body {
         text-align: center;
         background: #193549;
@@ -60,35 +66,31 @@
       }
 
       img {
-        padding: 10px;
-        filter: 0px;
-        background-color: #ffc600;
+        padding: var(--spacing);
+        filter: blur(var(--blur));
+        background-color: var(--base);
       }
 
       .hl {
-        color: #ffc600;
+        color: var(--base);
       }
     </style>
 
     <script>
-      const spacing = document.querySelector("#spacing");
-      const blur = document.querySelector("#blur");
-      const base = document.querySelector("#base");
+      const inputs = document.querySelectorAll(".controls input");
       const img = document.querySelector("img");
       const hl = document.querySelector(".hl");
 
-      spacing.addEventListener("change", () => {
-        img.style.setProperty("padding", `${spacing.value}px`);
+      inputs.forEach((input) => {
+        input.addEventListener("change", setPicture);
+        //為什麼setPicture()會是undifined
       });
 
-      blur.addEventListener("change", () => {
-        img.style.setProperty("filter", `blur(${blur.value}px)`);
-      });
-
-      base.addEventListener("change", () => {
-        img.style.setProperty("background-color", base.value);
-        hl.style.setProperty("color", base.value);
-      });
+      function setPicture() {
+      const suffix = this.dataset.sizing || "";
+      img.style.setProperty(`--${this.name}`, this.value + suffix);
+      hl.style.setProperty(`--${this.name}`, this.value + suffix);
+      }
     </script>
   </body>
 </html>

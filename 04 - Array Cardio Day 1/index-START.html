@@ -99,31 +99,32 @@
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
-      const question4 = inventors.reduce((accumulator, inventor) => 
-      accumulator + (inventor.passed - inventor.year), 0);
+      const question4 = inventors.reduce(
+        (accumulator, inventor) =>
+          accumulator + (inventor.passed - inventor.year),
+        0
+      );
       console.log(question4);
 
       // 5. Sort the inventors by years lived
       const question5 = inventors.sort((inventorA, inventorB) => {
-        const inventorLiveA = inventorA.passed - inventorA.year
-        const inventorLiveB = inventorB.passed - inventorB.year
-        return inventorLiveA - inventorLiveB
+        const inventorLiveA = inventorA.passed - inventorA.year;
+        const inventorLiveB = inventorB.passed - inventorB.year;
+        return inventorLiveA - inventorLiveB;
       });
       console.table(question5);
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-        
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
       const question7 = people.sort((peopleA, peopleB) => {
-        const [lastNameA, firstNameA] = peopleA.split(", ")
-        const [lastNameB, firstNameB] = peopleB.split(", ")
-        return lastNameA > lastNameB ? 1 : -1;
-      })
-      console.log(question7);
-
+        const [lastNameA, firstNameA] = peopleA.split(", ");
+        const [lastNameB, firstNameB] = peopleB.split(", ");
+        return lastNameA > lastNameB ? -1 : 1;
+      });
+      console.table(question7);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -144,13 +145,13 @@
         "truck",
       ];
       const question8 = data.reduce((obj, item) => {
-        if(!obj[item]){
+        if (!obj[item]) {
           // 判斷如果沒有出現過這個物件：就造一個初始值０，如果關掉就會一直被重置數量不會累加
           obj[item] = 0;
         }
-        obj[item]++
-        return obj
-      },{})
+        obj[item]++;
+        return obj;
+      }, {});
       console.log(question8);
     </script>
   </body>

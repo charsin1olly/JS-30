@@ -26,7 +26,7 @@
         name="blur"
         min="0"
         max="25"
-        value="10"
+        value="0"
         data-sizing="px"
       />
 
@@ -84,12 +84,13 @@
       inputs.forEach((input) => {
         input.addEventListener("change", setPicture);
         //為什麼setPicture()會是undifined
+        input.addEventListener("mousemove", setPicture);
       });
 
       function setPicture() {
-      const suffix = this.dataset.sizing || "";
-      img.style.setProperty(`--${this.name}`, this.value + suffix);
-      hl.style.setProperty(`--${this.name}`, this.value + suffix);
+        const suffix = this.dataset.sizing || "";
+        img.style.setProperty(`--${this.name}`, this.value + suffix);
+        hl.style.setProperty(`--${this.name}`, this.value + suffix);
       }
     </script>
   </body>
